@@ -1,0 +1,3 @@
+#!/bin/sh
+qemune -rtc base=localtime -drive file='/home/m8ku/prog/src/00_boot_only/boot.img',format=raw -boot order=c
+

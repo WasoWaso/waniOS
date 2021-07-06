@@ -1,0 +1,2 @@
+#!/bin/sh
+nasmiku '/home/m8ku/prog/src/00_boot_only/boot.asm' -o '/home/m8ku/prog/src/00_boot_only/boot.img' -l '/home/m8ku/prog/src/00_boot_only/boot.lst'

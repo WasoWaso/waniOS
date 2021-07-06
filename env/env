@@ -1,0 +1,3 @@
+#!/bin/sh
+	PATH="$PATH:~/prog/env/"
+	PATH="$PATH:~/prog/tools/qemu/"
