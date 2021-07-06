@@ -1,3 +1,4 @@
 #!/bin/sh
-	PATH="$PATH:~/prog/env/"
-	PATH="$PATH:~/prog/tools/qemu/"
+	PATH="$PATH:~/prog/env"
+	PATH="$PATH:~/prog/tools/qemu"
+	PATH="$PATH:~/prog/tools/nasm-2.14.02!"

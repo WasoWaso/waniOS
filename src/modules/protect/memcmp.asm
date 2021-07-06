@@ -1,38 +1,38 @@
 ;memcmp(src0,src1,size)
 memcmp:
-        push    bp                                      ; スタックフレームの構築
-        mov     bp, sp                                  ;
+        push    ebp                                     ; スタックフレームの構築
+        mov     ebp, esp                                ;
 
-        push    bx                                      ; 各レジスタの退避
-        push    cx                                      ;
-        push    dx                                      ;
-        push    si                                      ;
-        push    di                                      ;
+        push    ebx                                     ; 各レジスタの退避
+        push    ecx                                     ;
+        push    edx                                     ;
+        push    esi                                     ;
+        push    edi                                     ;
 
-        mov     si, [bp+4]                              ; 第一引数にアクセス
-        mov     di, [bp+6]                              ; 第二引数にアクセス
-        mov     cx, [bp+8]                              ; 第三引数にアクセス
+        mov     esi, [ebp+4]                            ; 第一引数にアクセス
+        mov     edi, [ebp+6]                            ; 第二引数にアクセス
+        mov     ecx, [ebp+8]                            ; 第三引数にアクセス
 
         cld                                             ; DF==0
         repe cmpsb                                      ; 比較
         jnz     .10F                                    ; if(ZF==0)だったら.10Fへ分岐
-        mov     ax, 0                                   ;
+        mov     eax, 0                                  ;
         jmp     .end                                    ;
 .10F:
-        mov     ax, -1                                  ;
+        mov     eax, -1                                 ;
 .end:
-        pop     di                                      ; 各レジスタの復帰
-        pop     si                                      ;
-        pop     dx                                      ;
-        pop     cx                                      ;
-        pop     bx                                      ;
+        pop     edi                                     ; 各レジスタの復帰
+        pop     esi                                     ;
+        pop     edx                                     ;
+        pop     ecx                                     ;
+        pop     ebx                                     ;
 
-        mov     sp, bp                                  ; スタックフレームの破棄
-        pop     bp                                      ;
+        mov     esp, ebp                                ; スタックフレームの破棄
+        pop     ebp                                     ;
 
         ret                                             ; 関数の終了
 
-; (関数の概要())
+; (関数の概要(メモリの中を比較する関数です))
 ; 1.まずはスタックフレームの構築
 ; 2.お邪魔するレジスタたちをスタックに積んで
 ; 3.引数を受け取る
