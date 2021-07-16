@@ -8,6 +8,7 @@ memcmp:
         push    dx                                      ;
         push    si                                      ;
         push    di                                      ;
+        pushf                                           ;
 
         mov     si, [bp+4]                              ; 第一引数にアクセス
         mov     di, [bp+6]                              ; 第二引数にアクセス
@@ -21,6 +22,7 @@ memcmp:
 .10F:
         mov     ax, -1                                  ;
 .end:
+        popf                                            ;
         pop     di                                      ; 各レジスタの復帰
         pop     si                                      ;
         pop     dx                                      ;

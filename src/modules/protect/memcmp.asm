@@ -8,6 +8,7 @@ memcmp:
         push    edx                                     ;
         push    esi                                     ;
         push    edi                                     ;
+        pushf                                           ;
 
         mov     esi, [ebp+4]                            ; 第一引数にアクセス
         mov     edi, [ebp+6]                            ; 第二引数にアクセス
@@ -21,6 +22,7 @@ memcmp:
 .10F:
         mov     eax, -1                                 ;
 .end:
+        popf                                            ;
         pop     edi                                     ; 各レジスタの復帰
         pop     esi                                     ;
         pop     edx                                     ;
