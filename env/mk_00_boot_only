@@ -1,24 +1,25 @@
 #!/bin/bash
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 ]; then                       #有効な引数か判定
     echo "指定された引数は$#個だったので、!"
     echo "少なくとも１つの引数を指定してね"
-    exit 1
+    exit 1                                  #ステータス１で異常終了
 fi
+
     arg=$1
     echo '引数は'${arg}'だよね？'
-    echo '組み合わせた文字列を綴るよ'
-    path1='~/prog/src/${arg}/boot.asm'
+    echo '組み合わせた文字列を書くよ'
+    path1='~/prog/src/${arg}/boot.asm'      #第一引数を生成
     path1=$(eval echo ${path1})
-    path2='~/prog/src/${arg}/boot.img'
+    path2='~/prog/src/${arg}/boot.img'      #第二引数を生成
     path2=$(eval echo ${path2})
-    path3='~/prog/src/${arg}/boot.lst'
+    path3='~/prog/src/${arg}/boot.lst'      #第三引数を生成
     path3=$(eval echo ${path3})
 
-    for var in path1 path2 path3
+    for var in path1 path2 path3            #３つ引数を出力
     do
         echo ${!var}
     done
-    eval nasmiku ${path1} -o ${path2} -l ${path3}
+    eval nasmiku ${path1} -o ${path2} -l ${path3}   #アセンブル
 
 
-    exit 0
+    exit 0                                  #ステータス０で正常終了
