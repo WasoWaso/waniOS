@@ -1,2 +1,7 @@
-#!/bin/sh
- qemu-system-i386 -rtc base=localtime -drive file='/home/m8ku/prog/src/00_boot_only/boot.img',format=raw -boot order=c
+#!/bin/bash
+    arg=$1
+    path1="~/prog/src/${arg}/boot.img"                                                                  #引数を生成
+    path1=$(eval echo ${path1})
+
+    eval /usr/bin/qemu-system-i386 -rtc base=localtime -drive file=${path1},format=raw -boot order=c    #実行
+　　 /usr/bin/qemu-system-i386

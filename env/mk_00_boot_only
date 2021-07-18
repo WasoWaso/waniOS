@@ -22,4 +22,5 @@ fi
     eval nasmiku ${path1} -o ${path2} -l ${path3}   #アセンブル
 
 
+
     exit 0                                  #ステータス０で正常終了
