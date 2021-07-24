@@ -42,7 +42,7 @@ BOOT:
         ; IPL( Initial Program Loader )
         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         times 510 - ($ - $$) db 0x00                    ; IPL領域を浸す
-        db      0x55 , 0xAA                      ;       ; 0x55 0xAA
+        db      0x55 , 0xAA                             ; 0x55 0xAA
 
 
 ;(関数の概要(ブートプログラムです))
