@@ -11,7 +11,7 @@ BPB:
         ; BPB( BIOS Parameter Block )
         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-        timES  90 - ( $ - $$ ) db 0x90                  ; BPB領域を確保
+        times  90 - ( $ - $$ ) db 0x90                  ; BPB領域を確保
 IPL:
         cli                                             ; 割り込み禁止
 
