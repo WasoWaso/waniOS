@@ -1,3 +1,4 @@
+;cdecl()
 %macro  cdecl   1-*.nolist
 
     %rep %0 - 1

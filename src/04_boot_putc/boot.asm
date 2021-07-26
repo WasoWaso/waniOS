@@ -1,8 +1,8 @@
 ;boot()
-%include "../modules/real/putc.asm"
-%include "../include/macro.asm"
 
 ORG     0x7c00                                          ;
+
+        %include "/home/m8ku/prog/src/include/macro.asm"; マクロ
 
 Entry:
         jmp     IPL                                     ; IPLラベルへ移動
@@ -43,6 +43,9 @@ BOOT:
         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         ; IPL( Initial Program Loader )
         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        %include "/home/m8ku/prog/src/modules/real/putc.asm"; モジュール
+
         times 510 - ($ - $$) db 0x00                    ; IPL領域を浸す
         db      0x55 , 0xAA                             ; 0x55 0xAA
 
