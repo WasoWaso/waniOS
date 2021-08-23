@@ -3,5 +3,5 @@
     path1="~/prog/src/${arg}/boot.img"                                                                  #引数を生成
     path1=$(eval echo ${path1})
 
-    eval /usr/bin/qemu-system-i386 -rtc base=localtime -drive file=${path1},format=raw -boot order=c    #実行
+    eval /usr/bin/qemu-system-i386 -rtc base=localtime -drive file=${path1},format=raw -boot order=c -monitor stdio    #実行
 　　 /usr/bin/qemu-system-i386
