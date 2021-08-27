@@ -145,7 +145,7 @@ stage_2:
 .p1     db  "--, C:0x"
 .p2     db  "----, H:0x"
 .p3     db  "--, S:0x"
-.p4     db  "--", 0x0D, 0x0A, 0
+.p4     db  "--", 0x0A, 0x0D, 0
 
 .e0     db  "Error:Can't get parameter.", 0
 
