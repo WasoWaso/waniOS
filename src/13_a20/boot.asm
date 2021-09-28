@@ -239,7 +239,11 @@ stage_4th:
         cdecl   puts, .s2                               ;   puts(.s2);
 .10E:                                                   ; }
         cdecl   KBC_Cmd_Write, 0xAE                     ; //キーボード有効化
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 291f6dd653f0f362ec36a1687f95878b5ebff402
         sti                                             ; //割り込み許可
 
         cdecl   puts, .s1                               ; puts(.s1);
