@@ -1,26 +1,79 @@
 #!/bin/bash
-if [ $# -ne 1 ]; then                       #有効な引数か判定
-    echo "指定された引数は$#個だったので、!"
-    echo "少なくとも１つの引数を指定してね"
-    exit 1                                  #ステータス１で異常終了
-fi
-
+compile(){
     arg=$1
-    echo '引数は'${arg}'だよね？'
-    echo '組み合わせた文字列を書くよ'
-    path1='~/prog/src/${arg}/boot.asm'      #第一引数を生成
+    echo '　引数は'${arg}'だよね？'
+
+    flag=0                                               #判定用の旗
+
+    echo '_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _'
+    echo '01 "boot.asm"を検査中です...'                    #bootの検査
+    path1='~/prog/src/${arg}/boot.asm'
     path1=$(eval echo ${path1})
-    path2='~/prog/src/${arg}/boot.img'      #第二引数を生成
-    path2=$(eval echo ${path2})
-    path3='~/prog/src/${arg}/boot.lst'      #第三引数を生成
-    path3=$(eval echo ${path3})
+    if [[ -f ${path1} ]]; then
+        path2='~/prog/src/${arg}/boot.bin'
+        path2=$(eval echo ${path2})
+        path3='~/prog/src/${arg}/boot.lst'
+        path3=$(eval echo ${path3})
+        for var in path1 path2 path3                      #3つ引数を出力
+        do
+            echo -n "---"
+            echo ${!var}
+        done
+        echo -n ' アセンブルちゅー... '
+        nasmiku ${path1} -o ${path2} -l ${path3}          #boot.asmをアセンブル
+        echo '完了'
+        flag=$(( flag + 1 ))
+        echo '_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _'
+    else
+        echo ' "boot.asm"がみつからない（＞＜）'
+        echo ' 名前ま間違ってるかも...'
+		echo ' またね...'
+		exit 0
+    fi
 
-    for var in path1 path2 path3            #３つ引数を出力
-    do
-        echo ${!var}
-    done
-    eval nasmiku ${path1} -o ${path2} -l ${path3}   #アセンブル
+    echo '02 "kernel.asm"を検査中です...'                  #kernelの検査
+    path4='~/prog/src/${arg}/kernel.asm'
+    path4=$(eval echo ${path4})
+    if [[ -f ${path4} ]]; then
+        path5='~/prog/src/${arg}/kernel.bin'
+        path5=$(eval echo ${path5})
+        path6='~/prog/src/${arg}/kernel.lst'
+        path6=$(eval echo ${path6})
+        for var in path4 path5 path6                       #3つ引数を出力
+        do
+            echo -n "---"
+            echo ${!var}
+        done
+        echo -n ' アセンブルちゅー... '
+        nasmiku ${path4} -o ${path5} -l ${path6}           #kernel.asmをアセンブル
+        echo '完了'
+        flag=$(( flag + 1))
+        echo '_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _'
+    else
+        echo '  -"kernel.asm"が見つからない（＞＜）'
+        echo '  -"boot.asm"のみを含む"boot.img"を渡しますね'
+        path7='~/prog/src/${arg}/boot.img'
+        path7=$(eval echo ${path7})
+        mv  ${path2} ${path7}
+        echo ' 完了です!^^'
+        exit 0                                              #ステータス0で正常終了
+    fi
+    echo ${path7}
+    echo -n '03 "boot.bin"と"kernel.bin"の結合'            #boot部とkernel部を結合
+    if [ ${flag} = 2 ] && [[ -f ${path2} ]] && [[ -f ${path5} ]]; then
+        echo '中です'...
+        path7='~/prog/src/${arg}/boot.img'
+        path7=$(eval echo ${path7})
+        echo -n "---魔導書の展開予定場所 "
+        echo ${path7}
+        echo -n ' 術式を結合中...'
+        cat ${path2} ${path5} > "${path7}"
+        echo ' 完了です!!^^'
+        else
+        echo -n 'ができません'
+        echo '必要な魔術書が見つからない（＞＜）'
+    fi
 
-
-
-    exit 0                                  #ステータス０で正常終了
+    exit 0                                                  #ステータス０で正常終了
+}
+	compile $1
