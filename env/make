@@ -77,3 +77,4 @@ compile(){
     exit 0                                                  #ステータス０で正常終了
 }
 	compile $1
+    # ./make フォルダ名でアセンブル
